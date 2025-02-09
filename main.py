@@ -12,5 +12,14 @@ def kelvin_to_celsius(temp):
 complete_url = f"{base_url}appid={API_key}&q={city_name}"
 
 response = requests.get(complete_url).json()
+
+temperature = response['main']['temp']
+feel_like_kelvin = response['main']['feels_like']
+feel_like_celsius = kelvin_to_celsius(feel_like_kelvin)
+wind_speed = response['wind']['speed']
+humidity = response['main']['humidity']
+description = response['weather'][0]['description']
+sunrise = dt.datetime.utcfromtimestamp(response['sys']['sunrise'] + response['timezone']).strftime('%H:%M:%S')
+sunset = dt.datetime.utcfromtimestamp(response['sys']['sunset'] + response['timezone']).strftime('%H:%M:%S')
+
 print(response)
- 
